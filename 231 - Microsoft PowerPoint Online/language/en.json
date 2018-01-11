@@ -1,0 +1,16 @@
+
+{
+
+  "welcome" : "Welcome to Microsoft Powerpoint Online",
+  "welcomeText"	: "To begin, create a new presentation or open any presentation stored inside horbito.",
+  "newDocument" : "New presentation",
+  "openDocument" : "Open...",
+
+	"createFileError": "We're sorry, there was an error creating the file.",
+	"openFileError": "We're sorry, there was an error opening the file.",
+
+  "loading": "Loading...",
+  "need115Version": "Horbito App with at least version 1.1.5 is required to open this file. Please, update the app and try again.",
+  "opening" : "Opening"
+
+}

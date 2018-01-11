@@ -1,0 +1,24 @@
+
+.ui-header{
+  position: absolute;
+  text-align: left;
+  height: 50px;
+  background: #d24726;
+  border-bottom: none;
+  border-radius: 3px 3px 0 0;
+}
+
+.ui-header img{
+  padding: 7px 0 0 20px;
+  width: 230px;
+  height: 36px;
+}
+
+.ui-header-buttons{
+  padding-top: 5px;
+}
+
+iframe{
+  width: 100%;
+  height: 100%;
+}
