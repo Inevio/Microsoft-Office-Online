@@ -1,0 +1,37 @@
+
+.ui-header{
+    position: absolute;
+    height: 49px;
+    /*background: #217346;*/
+    background: none;
+    border-bottom: none;
+    border-radius: 0;
+}
+
+.ui-header img{
+    padding: 6px 0 0 12px;
+}
+
+.ui-header-buttons{
+    padding-top: 5px;
+}
+
+.editor{
+    width: 100%;
+    height: 100%;
+}
+
+.office_frame {
+    width: 100%;
+    height: 100%;
+    /*
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+    */
+    border: none;
+    display: block;
+}

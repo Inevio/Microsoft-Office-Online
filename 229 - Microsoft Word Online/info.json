@@ -1,0 +1,255 @@
+
+{
+
+    "name" : "Microsoft Word Online",
+
+    "version" : "1.0",
+    "stage"   : "beta",
+    "api"     : "a100d2",
+
+    "language" : {
+
+        "default" : "en-en",
+        "list"    : [ "en-en" ]
+
+    },
+
+    "device" : {
+
+        "desktop" : {
+
+            "primary" : "launcher",
+            "service" : [],
+            "common" : {
+
+                "css"    : [],
+                "script" : [],
+                "start"  : []
+
+            },
+
+            "view" : {
+
+                "launcher" : {
+
+                    "template" : "launcher.html",
+
+                    "maxizable" : false,
+                    "maximized" : false,
+                    "resizable" : false,
+
+                    "width"  : {
+
+                        "default" : 509,
+                        "min"     : 509,
+                        "max"     : 0
+
+                    },
+
+                    "height" : {
+
+                        "default" : 506,
+                        "min"     : 506,
+                        "max"     : 0
+
+                    },
+
+                    "css"    : ["launcher.css"],
+                    "script" : ["launcher.js"],
+                    "start"  : ["start.js"]
+
+                },
+
+                "editor" : {
+
+                    "template" : "editor.html",
+
+                    "maxizable" : false,
+                    "maximized" : false,
+                    "resizable" : false,
+
+                    "width"  : {
+
+                        "default" : 0,
+                        "min"     : 0,
+                        "max"     : 0
+
+                    },
+
+                    "height" : {
+
+                        "default" : 0,
+                        "min"     : 0,
+                        "max"     : 0
+
+                    },
+
+                    "css"    : ["editor.css"],
+                    "script" : ["editor.js"],
+                    "start"  : []
+
+                },
+
+                "visor" : {
+
+                    "template" : "desktopVisor.html",
+
+                    "resizable" : true,
+                    "maxizable" : true,
+
+                    "width"  : {
+
+                        "default" : 830,
+                        "min"     : 655,
+                        "max"     : 0
+
+                    },
+
+                    "height" : {
+
+                        "default" : 600,
+                        "min"     : 400,
+                        "max"     : 0
+
+                    },
+
+                    "css"    : ["desktopVisor.css"],
+                    "script" : ["desktopVisor.js"],
+                    "start"  : []
+
+                }
+
+            }
+
+        },
+
+        "mobile" : {
+
+            "primary" : "visor",
+            "hidden" : true,
+            "service" : [],
+            "common" : {
+
+                "css"    : [],
+                "script" : [],
+                "start"  : []
+
+            },
+
+            "view" : {
+
+                "visor" : {
+
+                    "template" : "mobileVisor.html",
+
+                    "maxizable" : false,
+                    "maximized" : false,
+                    "resizable" : false,
+
+                    "width"  : {
+
+                        "default" : 500,
+                        "min"     : 500,
+                        "max"     : 500
+
+                    },
+
+                    "height" : {
+
+                        "default" : 500,
+                        "min"     : 500,
+                        "max"     : 500
+
+                    },
+
+                    "css"    : ["mobileVisor.css"],
+                    "script" : ["mobileVisor.js"],
+                    "start"  : []
+
+                }
+
+            }
+
+        },
+
+        "link" : {
+
+            "primary" : "linkVisor",
+            "service" : [],
+            "common" : {
+
+                "css"    : [],
+                "script" : [],
+                "start"  : []
+
+            },
+
+            "view" : {
+
+                "linkVisor" : {
+
+                    "template" : "linkVisor.html",
+
+                    "maxizable" : true,
+                    "maximized" : true,
+                    "resizable" : false,
+
+                    "width"  : {
+
+                        "default" : 500,
+                        "min"     : 500,
+                        "max"     : 0
+
+                    },
+
+                    "height" : {
+
+                        "default" : 500,
+                        "min"     : 500,
+                        "max"     : 0
+
+                    },
+
+                    "css"    : ["linkVisor.css"],
+                    "script" : ["linkVisor.js"],
+                    "start"  : []
+
+                }
+
+            }
+
+        }
+
+
+    },
+
+    "permission" : {
+
+        "fs" : {
+
+            "create" : true,
+            "modify" : true,
+            "read"   : true
+        },
+
+        "integration" : {
+
+            "dropbox"   : true,
+            "gdrive"    : true,
+            "onedrive"  : true,
+            "gmail"     : true
+
+        },
+
+        "user" : {
+
+            "modify" : true,
+            "read"   : true
+
+        },
+
+        "popup" : true
+
+    }
+
+}

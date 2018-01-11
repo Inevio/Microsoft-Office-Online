@@ -1,0 +1,16 @@
+
+{
+
+  "welcome" : "Bienvenido a Microsoft Word Online",
+  "welcomeText"	: "Para comenzar, crea un nuevo documento o abre uno que tengas en horbito.",
+  "newDocument" : "Nuevo documento",
+  "openDocument" : "Abrir...",
+
+	"createFileError": "Lo sentimos, ha habido un error creando el archivo.",
+	"openFileError": "Lo sentimos, ha habido un error abriendo el archivo.",
+
+  "loading": "Cargando...",
+  "need115Version": "Es necesario que la app de Horbito sea la versión 1.1.5 o superior para abrir este archivo. Por favor, actualiza y prueba de nuevo.",
+  "opening" : "Abriendo"
+
+}
