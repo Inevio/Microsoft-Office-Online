@@ -49,29 +49,81 @@ if( typeof params.data !== 'object' ){
 
 params.data.done( function( id ){
 
-  api.fs( id, function( error, fsnode ){
+  console.log( params )
 
-    if( error ){
-      return alert( lang.openFileError, _close );
-    }
+  if( params.gdrive ){
 
-    fsnode.getFormats( function( error, formats ){
+    api.integration.gdrive( params.gdrive, function( err, account ){
+
+      if( err ){
+        return alert( lang.openFileError, _close );
+      }
+
+      account.get( id, function( err, entry ){
+
+        console.log( err )
+        if( err ){
+          return alert( lang.openFileError, _close );
+        }
+
+        // To Do -> Improve check like horbito's files
+        windowObject.location.href = 'https://static.inevio.com/app/231/editor.html?id=' + encodeURIComponent( 'gdrive:' + params.gdrive + ':' + id )  + '&empty=0';
+
+      })
+
+    })
+
+  }else if( params.dropbox ){
+
+     api.integration.dropbox( params.dropbox, function( err, account ){
+
+      console.log( err, account )
+
+      if( err ){
+        return alert( lang.openFileError, _close );
+      }
+
+      account.get( id, function( err, entry ){
+
+        console.log( err )
+        if( err ){
+          return alert( lang.openFileError, _close );
+        }
+
+        // To Do -> Improve check like horbito's files
+        windowObject.location.href = 'https://static.inevio.com/app/231/editor.html?id=' + encodeURIComponent( 'dropbox:' + params.dropbox + ':' + id )  + '&empty=0';
+
+      })
+
+    })
+
+  }else{
+
+    api.fs( id, function( error, fsnode ){
 
       if( error ){
         return alert( lang.openFileError, _close );
       }
 
-      if( !formats.original || !formats.original.size ){
-        windowObject.location.href = 'https://static.inevio.com/app/231/editor.html?id=' + id + '&empty=1';
-      }else if( VALID_MIMES.indexOf( formats.original.mime ) !== -1 ){
-        windowObject.location.href = 'https://static.inevio.com/app/231/editor.html?id=' + id + '&empty=0';
-      }else{
-        alert( lang.openFileError, _close );
-      }
+      fsnode.getFormats( function( error, formats ){
 
-    })
+        if( error ){
+          return alert( lang.openFileError, _close );
+        }
 
-  });
+        if( !formats.original || !formats.original.size ){
+          windowObject.location.href = 'https://static.inevio.com/app/231/editor.html?id=' + id + '&empty=1';
+        }else if( VALID_MIMES.indexOf( formats.original.mime ) !== -1 ){
+          windowObject.location.href = 'https://static.inevio.com/app/231/editor.html?id=' + id + '&empty=0';
+        }else{
+          alert( lang.openFileError, _close );
+        }
+
+      })
+
+    });
+
+  }
 
 });
 
