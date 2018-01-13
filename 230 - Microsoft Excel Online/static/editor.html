@@ -45,8 +45,12 @@
       for( var i in queryList ){
 
         var tmp = queryList[ i ].split('=');
-        query[ tmp[ 0 ] ] = parseInt( tmp[ 1 ] );
+        query[ tmp[ 0 ] ] = tmp[ 1 ];
 
+      }
+
+      if( query.id && query.id.indexOf && query.id.indexOf('dropbox') === -1 && query.id.indexOf('gdrive') === -1 ){
+        query.id = parseInt( query.id )
       }
 
       if( query.empty ){
