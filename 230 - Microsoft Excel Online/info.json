@@ -231,6 +231,14 @@
             "read"   : true
         },
 
+         "integration" : {
+
+            "dropbox"   : true,
+            "gdrive"    : true,
+            "onedrive"  : true
+
+        },
+
         "user" : {
 
             "modify" : true,
