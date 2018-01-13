@@ -49,6 +49,8 @@ if( typeof params.data !== 'object' ){
 
 params.data.done( function( id ){
 
+  console.log( params )
+
   if( params.gdrive ){
 
     api.integration.gdrive( params.gdrive, function( err, account ){
@@ -66,6 +68,30 @@ params.data.done( function( id ){
 
         // To Do -> Improve check like horbito's files
         windowObject.location.href = 'https://static.inevio.com/app/229/editor.html?id=' + encodeURIComponent( 'gdrive:' + params.gdrive + ':' + id )  + '&empty=0';
+
+      })
+
+    })
+
+  }else if( params.dropbox ){
+
+     api.integration.dropbox( params.dropbox, function( err, account ){
+
+      console.log( err, account )
+
+      if( err ){
+        return alert( lang.openFileError, _close );
+      }
+
+      account.get( id, function( err, entry ){
+
+        console.log( err )
+        if( err ){
+          return alert( lang.openFileError, _close );
+        }
+
+        // To Do -> Improve check like horbito's files
+        windowObject.location.href = 'https://static.inevio.com/app/229/editor.html?id=' + encodeURIComponent( 'dropbox:' + params.dropbox + ':' + id )  + '&empty=0';
 
       })
 
