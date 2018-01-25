@@ -97,6 +97,23 @@ params.data.done( function( id ){
 
     })
 
+  }else if( params.onedrive ){
+
+    api.integration.onedrive( params.onedrive, function( err, account ){
+
+      account.get( id, function( err, entry ){
+
+        if( err ){
+          return alert( lang.openFileError, _close );
+        }
+
+        // To Do -> Improve check like horbito's files
+        windowObject.location.href = 'https://static.inevio.com/app/229/editor.html?id=' + encodeURIComponent( 'onedrive:' + params.onedrive + ':' + id )  + '&empty=0';
+
+      })
+
+    })
+
   }else{
 
     api.fs( id, function( error, fsnode ){
