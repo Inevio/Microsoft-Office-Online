@@ -1,12 +1,20 @@
 
-var VALID_MIMES  = ['application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
-var dontWait     = false;
-var win          = $(this);
-var width        = api.tool.desktopWidth();
-var height       = api.tool.desktopHeight() - 70;
-var windowObject = api.popup( 'https://static.inevio.com/app/229/editor.html', width, height ).render();
+var VALID_MIMES  = ['application/vnd.openxmlformats-officedocument.wordprocessingml.document']
+var dontWait     = false
+var win          = $(this)
+var width        = api.tool.desktopWidth()
+var height       = api.tool.desktopHeight() - 70
+var isElectron   = false
+//var windowObject = api.popup( 'https://static.inevio.com/app/361/editor.html', width, height ).render();
 
-var timer = setInterval( function(){
+var userAgent = navigator.userAgent.toLowerCase()
+if (userAgent.indexOf(' electron/') > -1) {
+   // Electron-specific code
+   console.log('electron')
+   isElectron = true
+}
+
+/*var timer = setInterval( function(){
 
   if( windowObject.closed ){
 
@@ -38,13 +46,11 @@ $( (function(){return this;})() ).on( 'beforeunload', function(){
 // Start
 if( !params || params.command !== 'openFile' ){
   return api.app.removeView( win );
-}
+}*/
 
 if( typeof params.data !== 'object' ){
-
   dontWait    = params.data;
   params.data = $.Deferred();
-
 }
 
 params.data.done( function( id ){
@@ -67,7 +73,8 @@ params.data.done( function( id ){
         }
 
         // To Do -> Improve check like horbito's files
-        windowObject.location.href = 'https://static.inevio.com/app/229/editor.html?id=' + encodeURIComponent( 'gdrive:' + params.gdrive + ':' + id )  + '&empty=0';
+        //windowObject.location.href = 'https://static.inevio.com/app/229/editor.html?id=' + encodeURIComponent( 'gdrive:' + params.gdrive + ':' + id )  + '&empty=0';
+        $('webview').attr('src', 'https://static.inevio.com/app/361/editor.html?id=' + encodeURIComponent( 'gdrive:' + params.gdrive + ':' + id )  + '&empty=0')
 
       })
 
@@ -91,7 +98,8 @@ params.data.done( function( id ){
         }
 
         // To Do -> Improve check like horbito's files
-        windowObject.location.href = 'https://static.inevio.com/app/229/editor.html?id=' + encodeURIComponent( 'dropbox:' + params.dropbox + ':' + id )  + '&empty=0';
+        //windowObject.location.href = 'https://static.inevio.com/app/229/editor.html?id=' + encodeURIComponent( 'dropbox:' + params.dropbox + ':' + id )  + '&empty=0';
+        $('webview').attr('src', 'https://static.inevio.com/app/361/editor.html?id=' + encodeURIComponent( 'dropbox:' + params.dropbox + ':' + id )  + '&empty=0')
 
       })
 
@@ -108,7 +116,8 @@ params.data.done( function( id ){
         }
 
         // To Do -> Improve check like horbito's files
-        windowObject.location.href = 'https://static.inevio.com/app/229/editor.html?id=' + encodeURIComponent( 'onedrive:' + params.onedrive + ':' + id )  + '&empty=0';
+        //windowObject.location.href = 'https://static.inevio.com/app/229/editor.html?id=' + encodeURIComponent( 'onedrive:' + params.onedrive + ':' + id )  + '&empty=0';
+        $('webview').attr('src', 'https://static.inevio.com/app/361/editor.html?id=' + encodeURIComponent( 'onedrive:' + params.onedrive + ':' + id )  + '&empty=0')
 
       })
 
@@ -129,9 +138,11 @@ params.data.done( function( id ){
         }
 
         if( !formats.original || !formats.original.size ){
-          windowObject.location.href = 'https://static.inevio.com/app/229/editor.html?id=' + id + '&empty=1';
+          //windowObject.location.href = 'https://static.inevio.com/app/229/editor.html?id=' + id + '&empty=1';
+          $('webview').attr('src', 'https://static.inevio.com/app/361/editor.html?id=' + id + '&empty=1')
         }else if( VALID_MIMES.indexOf( formats.original.mime ) !== -1 ){
-          windowObject.location.href = 'https://static.inevio.com/app/229/editor.html?id=' + id + '&empty=0';
+          //windowObject.location.href = 'https://static.inevio.com/app/229/editor.html?id=' + id + '&empty=0';
+          $('webview').attr('src', 'https://static.inevio.com/app/361/editor.html?id=' + id + '&empty=0')
         }else{
           alert( lang.openFileError, _close );
         }
