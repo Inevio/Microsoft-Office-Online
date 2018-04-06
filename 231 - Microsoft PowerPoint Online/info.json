@@ -86,7 +86,7 @@
 
                     "css"    : ["editor.css"],
                     "script" : ["editor.js"],
-                    "start"  : []
+                    "start"  : ["startEditor.js"]
 
                 },
 

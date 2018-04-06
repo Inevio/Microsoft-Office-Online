@@ -64,9 +64,9 @@
 
                     "template" : "editor.html",
 
-                    "maxizable" : false,
+                    "maxizable" : true,
                     "maximized" : false,
-                    "resizable" : false,
+                    "resizable" : true,
 
                     "width"  : {
 
@@ -86,7 +86,7 @@
 
                     "css"    : ["editor.css"],
                     "script" : ["editor.js"],
-                    "start"  : []
+                    "start"  : ["startEditor.js"]
 
                 },
 
