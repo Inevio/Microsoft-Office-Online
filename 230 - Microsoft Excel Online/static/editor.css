@@ -1,4 +1,45 @@
-
 .wz-view{
-    display: none;
+  display: none;
+}
+
+.wz-view.isElectron{
+  display: block;
+}
+
+.ui-header{
+  height: 34px;
+  background: #34579D;
+  box-shadow: inset 0 -1px 0 0 rgba(0,0,0,0.09);
+  border-bottom: none;
+}
+
+.ui-header .ui-header-buttons .ui-minimize, .ui-header .ui-header-buttons .ui-maximize, .ui-header .ui-header-buttons .ui-close{
+  margin-top: 3px;
+}
+
+.ui-header .ui-header-buttons .ui-minimize i, .ui-header .ui-header-buttons .ui-maximize i, .ui-header .ui-header-buttons .ui-close i{
+  background-image: url('@static/close_buttons.png');
+  background-size: 64px 11px;
+  background-repeat: no-repeat;
+}
+
+.ui-header .ui-header-buttons .ui-minimize i{
+  background-position: 0px 0px;
+}
+
+.ui-header .ui-header-buttons .ui-maximize i{
+  background-position: -26px 1px;
+}
+
+.ui-header .ui-header-buttons .ui-close i{
+  background-position: -55px 0px;
+}
+
+.ui-header-buttons .ui-minimize:hover, .ui-header-buttons .ui-maximize:hover, .ui-header-buttons .ui-close:hover{
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+webview{
+  width: 100%;
+  height: 100%;
 }
