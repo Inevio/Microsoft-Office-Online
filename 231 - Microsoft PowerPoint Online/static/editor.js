@@ -1,4 +1,3 @@
-
 var VALID_MIMES  = ['application/vnd.openxmlformats-officedocument.presentationml.presentation'];
 var dontWait     = false;
 var win          = $(this);
@@ -11,7 +10,6 @@ var userAgent = navigator.userAgent.toLowerCase()
 if (userAgent.indexOf(' electron/') > -1) {
    // Electron-specific code
    isElectron = true
-   win.addClass('isElectron')
 }
 
 if(!isElectron){
