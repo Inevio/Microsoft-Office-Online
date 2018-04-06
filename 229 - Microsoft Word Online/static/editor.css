@@ -13,6 +13,7 @@
   background-image: url('@static/close_buttons.png');
   background-size: 64px 11px;
   background-repeat: no-repeat;
+  opacity: 0.7;
 }
 
 .ui-header .ui-header-buttons .ui-minimize i{
@@ -29,6 +30,10 @@
 
 .ui-header-buttons .ui-minimize:hover, .ui-header-buttons .ui-maximize:hover, .ui-header-buttons .ui-close:hover{
   background-color: rgba(255, 255, 255, 0.3);
+}
+
+.ui-header-buttons .ui-minimize:active i, .ui-header-buttons .ui-maximize:active i, .ui-header-buttons .ui-close:active i{
+  opacity: 1;
 }
 
 webview{
