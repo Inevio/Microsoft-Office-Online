@@ -1,6 +1,10 @@
-/*.wz-view{
+.wz-view{
   display: none;
-}*/
+}
+
+.wz-view.isElectron{
+  display: block;
+}
 
 .ui-header{
   height: 34px;
