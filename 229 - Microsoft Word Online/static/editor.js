@@ -78,7 +78,9 @@ params.data.done(function (id) {
 
         // To Do -> Improve check like horbito's files
         if (isElectron) {
-          $('webview').attr('src', `https://static.inevio.com/app/229/editor.html?id=${encodeURIComponent(`gdrive:${params.gdrive}:${id} `)}&empty=0&w=${ALIAS}`)
+          let webviewDom = `<webview src="https://static.inevio.com/app/229/editor.html?id=${encodeURIComponent(`gdrive:${params.gdrive}:${id} `)}&empty=0&w=${ALIAS}"  autosize plugins allowpopups></webview>`
+          win.append(webviewDom)
+          // $('webview').attr('src', `https://static.inevio.com/app/229/editor.html?id=${encodeURIComponent(`gdrive:${params.gdrive}:${id} `)}&empty=0&w=${ALIAS}`)
         } else {
           windowObject.location.href = `https://static.inevio.com/app/229/editor.html?id=${encodeURIComponent(`gdrive:${params.gdrive}:${id}`)}&empty=0&w=${ALIAS}`
         }
@@ -105,7 +107,9 @@ params.data.done(function (id) {
         }
 
         if (isElectron) {
-          $('webview').attr('src', `https://static.inevio.com/app/229/editor.html?id=${encodeURIComponent(`dropbox:${params.dropbox}:${id} `)}&empty=0&w=${ALIAS}`)
+          let webviewDom = `<webview src="https://static.inevio.com/app/229/editor.html?id=${encodeURIComponent(`dropbox:${params.dropbox}:${id} `)}&empty=0&w=${ALIAS}"  autosize plugins allowpopups></webview>`
+          win.append(webviewDom)
+          // $('webview').attr('src', `https://static.inevio.com/app/229/editor.html?id=${encodeURIComponent(`dropbox:${params.dropbox}:${id} `)}&empty=0&w=${ALIAS}`)
         } else {
           windowObject.location.href = `https://static.inevio.com/app/229/editor.html?id=${encodeURIComponent(`dropbox:${params.dropbox}:${id}`)}&empty=0&w=${ALIAS}`
         }
@@ -126,7 +130,9 @@ params.data.done(function (id) {
         }
 
         if (isElectron) {
-          $('webview').attr('src', `https://static.inevio.com/app/229/editor.html?id=${encodeURIComponent(`onedrive:${params.onedrive}:${id}`)}&empty=0&w=${ALIAS}`)
+          let webviewDom = `<webview src="https://static.inevio.com/app/229/editor.html?id=${encodeURIComponent(`onedrive:${params.onedrive}:${id}`)}&empty=0&w=${ALIAS}"  autosize plugins allowpopups></webview>`
+          win.append(webviewDom)
+          // $('webview').attr('src', `https://static.inevio.com/app/229/editor.html?id=${encodeURIComponent(`onedrive:${params.onedrive}:${id}`)}&empty=0&w=${ALIAS}`)
         } else {
           windowObject.location.href = `https://static.inevio.com/app/229/editor.html?id=${encodeURIComponent(`onedrive:${params.onedrive}:${id}`)}&empty=0&w=${ALIAS}`
         }
@@ -153,7 +159,9 @@ params.data.done(function (id) {
         if (!formats.original || !formats.original.size) {
 
           if (isElectron) {
-            $('webview').attr('src', `https://static.inevio.com/app/229/editor.html?id=${id}&empty=1&w=${ALIAS}`)
+            let webviewDom = `<webview src="https://static.inevio.com/app/229/editor.html?id=${id}&empty=1&w=${ALIAS}"  autosize plugins allowpopups></webview>`
+            //$('webview').attr('src', `https://static.inevio.com/app/229/editor.html?id=${id}&empty=1&w=${ALIAS}`)
+            win.append(webviewDom)
           } else {
             windowObject.location.href = `https://static.inevio.com/app/229/editor.html?id=${id}&empty=1&w=${ALIAS}`
           }
@@ -161,7 +169,9 @@ params.data.done(function (id) {
         } else if (VALID_MIMES.indexOf(formats.original.mime) !== -1) {
 
           if (isElectron) {
-            $('webview').attr('src', `https://static.inevio.com/app/229/editor.html?id=${id}&empty=0&w=${ALIAS}`)
+            let webviewDom = `<webview src="https://static.inevio.com/app/229/editor.html?id=${id}&empty=1&w=${ALIAS}"  autosize plugins allowpopups></webview>`
+            //$('webview').attr('src', `https://static.inevio.com/app/229/editor.html?id=${id}&empty=0&w=${ALIAS}`)
+            win.append(webviewDom)
           } else {
             windowObject.location.href = `https://static.inevio.com/app/229/editor.html?id=${id}&empty=0&w=${ALIAS}`
           }
