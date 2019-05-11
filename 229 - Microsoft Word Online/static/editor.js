@@ -1,114 +1,116 @@
 
-var VALID_MIMES  = ['application/vnd.openxmlformats-officedocument.wordprocessingml.document']
-var dontWait     = false
-var win          = $(this)
-var width        = api.tool.desktopWidth()
-var height       = api.tool.desktopHeight() - 70
-var isElectron   = false
+var VALID_MIMES = ['application/vnd.openxmlformats-officedocument.wordprocessingml.document']
+var ALIAS = api.system.workplace().alias
+var dontWait = false
+var win = $(this)
+var width = api.tool.desktopWidth()
+var height = api.tool.desktopHeight() - 70
+var isElectron = false
 
 var userAgent = navigator.userAgent.toLowerCase()
 if (userAgent.indexOf(' electron/') > -1) {
-   // Electron-specific code
-   isElectron = true
+  // Electron-specific code
+  isElectron = true
 }
 
 if (!isElectron) {
 
-  var windowObject = api.popup( 'https://static.inevio.com/app/229/editor.html', width, height ).render();
+  var windowObject = api.popup('https://cdn.horbito.com/app/229/editor.html', width, height).render();
 
-  var timer = setInterval( function(){
+  var timer = setInterval(function () {
 
-    if( windowObject.closed ){
+    if (windowObject.closed) {
 
       api.view.remove();
-      clearInterval( timer );
+      clearInterval(timer);
 
     }
 
-  }, 500 );
+  }, 500);
 
-  var _close = function(){
-    api.app.removeView( win );
+  var _close = function () {
+    api.app.removeView(win);
   };
 
   // Events
   win
-  .on( 'ui-view-focus', function(){
-    windowObject.focus();
-  })
+    .on('ui-view-focus', function () {
+      windowObject.focus();
+    })
 
-  .on( 'ui-view-removed', function(){
-    windowObject.close();
-  });
+    .on('ui-view-removed', function () {
+      windowObject.close();
+    });
 
-  $( (function(){return this;})() ).on( 'beforeunload', function(){
+  $((function () { return this; })()).on('beforeunload', function () {
     windowObject.close();
   });
 
   // Start
-  if( !params || params.command !== 'openFile' ){
-    return api.app.removeView( win );
+  if (!params || params.command !== 'openFile') {
+    return api.app.removeView(win);
   }
 
 }
 
-if( typeof params.data !== 'object' ){
-  dontWait    = params.data;
+if (typeof params.data !== 'object') {
+  dontWait = params.data;
   params.data = $.Deferred();
 }
 
-params.data.done( function( id ){
+params.data.done(function (id) {
 
-  console.log( params )
+  console.log(params)
 
-  if( params.gdrive ){
+  if (params.gdrive) {
 
-    api.integration.gdrive( params.gdrive, function( err, account ){
+    api.integration.gdrive(params.gdrive, function (err, account) {
 
-      if( err ){
-        return alert( lang.openFileError, _close );
+      if (err) {
+        return alert(lang.openFileError, _close);
       }
 
-      account.get( id, function( err, entry ){
+      account.get(id, function (err, entry) {
 
-        console.log( err )
-        if( err ){
-          return alert( lang.openFileError, _close );
+        console.log(err)
+        if (err) {
+          return alert(lang.openFileError, _close);
         }
 
         // To Do -> Improve check like horbito's files
         if (isElectron) {
-          $('webview').attr('src', 'https://static.inevio.com/app/229/editor.html?id=' + encodeURIComponent( 'gdrive:' + params.gdrive + ':' + id )  + '&empty=0')
-        }else{
-          windowObject.location.href = 'https://static.inevio.com/app/229/editor.html?id=' + encodeURIComponent( 'gdrive:' + params.gdrive + ':' + id )  + '&empty=0'
+          let webviewDom = `<webview src="https://cdn.horbito.com/app/229/editor.html?id=${encodeURIComponent(`gdrive:${params.gdrive}:${id} `)}&empty=0&w=${ALIAS}" autosize plugins allowpopups></webview>`
+          win.append(webviewDom)
+        } else {
+          windowObject.location.href = `https://cdn.horbito.com/app/229/editor.html?id=${encodeURIComponent(`gdrive:${params.gdrive}:${id}`)}&empty=0&w=${ALIAS}`
         }
-        
 
       })
 
     })
 
-  }else if( params.dropbox ){
+  } else if (params.dropbox) {
 
-     api.integration.dropbox( params.dropbox, function( err, account ){
+    api.integration.dropbox(params.dropbox, function (err, account) {
 
-      console.log( err, account )
+      console.log(err, account)
 
-      if( err ){
-        return alert( lang.openFileError, _close );
+      if (err) {
+        return alert(lang.openFileError, _close);
       }
 
-      account.get( id, function( err, entry ){
+      account.get(id, function (err, entry) {
 
-        console.log( err )
-        if( err ){
-          return alert( lang.openFileError, _close );
+        console.log(err)
+        if (err) {
+          return alert(lang.openFileError, _close);
         }
 
         if (isElectron) {
-          $('webview').attr('src', 'https://static.inevio.com/app/229/editor.html?id=' + encodeURIComponent( 'dropbox:' + params.dropbox + ':' + id )  + '&empty=0')
-        }else{
-          windowObject.location.href = 'https://static.inevio.com/app/229/editor.html?id=' + encodeURIComponent( 'dropbox:' + params.dropbox + ':' + id )  + '&empty=0'
+          let webviewDom = `<webview src="https://cdn.horbito.com/app/229/editor.html?id=${encodeURIComponent(`dropbox:${params.dropbox}:${id} `)}&empty=0&w=${ALIAS}" autosize plugins allowpopups></webview>`
+          win.append(webviewDom)
+        } else {
+          windowObject.location.href = `https://cdn.horbito.com/app/229/editor.html?id=${encodeURIComponent(`dropbox:${params.dropbox}:${id}`)}&empty=0&w=${ALIAS}`
         }
         // To Do -> Improve check like horbito's files
 
@@ -116,61 +118,62 @@ params.data.done( function( id ){
 
     })
 
-  }else if( params.onedrive ){
+  } else if (params.onedrive) {
 
-    api.integration.onedrive( params.onedrive, function( err, account ){
+    api.integration.onedrive(params.onedrive, function (err, account) {
 
-      account.get( id, function( err, entry ){
+      account.get(id, function (err, entry) {
 
-        if( err ){
-          return alert( lang.openFileError, _close );
+        if (err) {
+          return alert(lang.openFileError, _close);
         }
 
         if (isElectron) {
-          $('webview').attr('src', 'https://static.inevio.com/app/229/editor.html?id=' + encodeURIComponent( 'onedrive:' + params.onedrive + ':' + id )  + '&empty=0')
-        }else{
-          windowObject.location.href = 'https://static.inevio.com/app/229/editor.html?id=' + encodeURIComponent( 'onedrive:' + params.onedrive + ':' + id )  + '&empty=0'
+          let webviewDom = `<webview src="https://cdn.horbito.com/app/229/editor.html?id=${encodeURIComponent(`onedrive:${params.onedrive}:${id}`)}&empty=0&w=${ALIAS}" autosize plugins allowpopups></webview>`
+          win.append(webviewDom)
+        } else {
+          windowObject.location.href = `https://cdn.horbito.com/app/229/editor.html?id=${encodeURIComponent(`onedrive:${params.onedrive}:${id}`)}&empty=0&w=${ALIAS}`
         }
 
         // To Do -> Improve check like horbito's files
-        
-
       })
 
     })
 
-  }else{
+  } else {
 
-    api.fs( id, function( error, fsnode ){
+    api.fs(id, function (error, fsnode) {
 
-      if( error ){
-        return alert( lang.openFileError, _close );
+      if (error) {
+        return alert(lang.openFileError, _close);
       }
 
-      fsnode.getFormats( function( error, formats ){
+      fsnode.getFormats(function (error, formats) {
 
-        if( error ){
-          return alert( lang.openFileError, _close );
+        if (error) {
+          return alert(lang.openFileError, _close);
         }
 
-        if( !formats.original || !formats.original.size ){
+        if (!formats.original || !formats.original.size) {
 
-          if(isElectron){
-            $('webview').attr('src', 'https://static.inevio.com/app/229/editor.html?id=' + id + '&empty=1')
-          }else{
-            windowObject.location.href = 'https://static.inevio.com/app/229/editor.html?id=' + id + '&empty=1'
+          if (isElectron) {
+            let webviewDom = `<webview src="https://static.inevio.com/app/229/editor.html?id=${id}&empty=1&w=${ALIAS}" autosize plugins allowpopups></webview>`
+            win.append(webviewDom)
+          } else {
+            windowObject.location.href = `https://cdn.horbito.com/app/229/editor.html?id=${id}&empty=1&w=${ALIAS}`
           }
-          
-        }else if( VALID_MIMES.indexOf( formats.original.mime ) !== -1 ){
 
-          if(isElectron){
-            $('webview').attr('src', 'https://static.inevio.com/app/229/editor.html?id=' + id + '&empty=0')
-          }else{
-            windowObject.location.href = 'https://static.inevio.com/app/229/editor.html?id=' + id + '&empty=0'
+        } else if (VALID_MIMES.indexOf(formats.original.mime) !== -1) {
+
+          if (isElectron) {
+            let webviewDom = `<webview src="https://static.inevio.com/app/229/editor.html?id=${id}&empty=0&w=${ALIAS}" autosize plugins allowpopups></webview>`
+            win.append(webviewDom)
+          } else {
+            windowObject.location.href = `https://cdn.horbito.com/app/229/editor.html?id=${id}&empty=0&w=${ALIAS}`
           }
-          
-        }else{
-          alert( lang.openFileError, _close );
+
+        } else {
+          alert(lang.openFileError, _close);
         }
 
       })
@@ -181,6 +184,6 @@ params.data.done( function( id ){
 
 });
 
-if( dontWait ){
-  params.data.resolve( dontWait );
+if (dontWait) {
+  params.data.resolve(dontWait);
 }
