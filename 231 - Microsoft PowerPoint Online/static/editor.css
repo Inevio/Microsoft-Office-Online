@@ -1,7 +1,6 @@
 .ui-header{
   height: 34px;
   background: #B7472A;
-  box-shadow: none;
   border-bottom: none;
 }
 
@@ -10,7 +9,7 @@
 }
 
 .ui-header .ui-header-buttons .ui-minimize i, .ui-header .ui-header-buttons .ui-maximize i, .ui-header .ui-header-buttons .ui-close i{
-  background-image: url('@static/close_buttons.png');
+  background-image: url('@cdn/close_buttons.png');
   background-size: 64px 11px;
   background-repeat: no-repeat;
   opacity: 0.7;

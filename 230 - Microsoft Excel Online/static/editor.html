@@ -1,68 +1,70 @@
 <html>
 
 <head>
-  <title>Excel Online - Inevio</title>
+  <title>Microsoft Excel Online - horbito</title>
   <link rel="shortcut icon" href="https://excel.officeapps-df.live.com/x/_layouts/resources/FavIcon_Excel.ico" />
-  <link rel="stylesheet" type="text/css" href="https://static.inevio.com/style/reset.css" media="screen" />
-  <script type="text/javascript" src="https://static.inevio.com/script/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.horbito.com/style/reset.css" media="screen" />
+  <script type="text/javascript" src="https://cdn.horbito.com/script/jquery.min.js"></script>
   <script type="text/javascript">
 
     var FORMAT = 'Excel';
 
-    var _doTheJob = function( data, status ){
+    var _doTheJob = function (data, status) {
 
-      if( status !== 'success' ){
+      if (status !== 'success') {
         alert('Error opening the file');
         return window.close();
       }
 
-      var frameholder  = $('.frameholder')[ 0 ];
+      var frameholder = $('.frameholder')[0];
       var office_frame = $('<iframe></iframe>');
 
       office_frame.addClass('office_frame');
-      office_frame.attr( 'name', 'office_frame' );
+      office_frame.attr('name', 'office_frame');
       office_frame.attr('allowfullscreen', 'true');
-      frameholder.appendChild( office_frame[ 0 ] );
+      frameholder.appendChild(office_frame[0]);
 
-      $('title').text( data.name + ' - ' + $('title').text() );
-      $('[name="access_token"]').attr( 'value', data.token );
-      $('[name="access_token_ttl"]').attr( 'value', data.expire );
-      $('.office_form').attr( 'target', 'office_frame' );
-      $('.office_form').attr( 'action', data.url );
+      $('title').text(data.name + ' - ' + $('title').text());
+      $('[name="access_token"]').attr('value', data.token);
+      $('[name="access_token_ttl"]').attr('value', data.expire);
+      $('.office_form').attr('target', 'office_frame');
+      $('.office_form').attr('action', data.url);
       $('.office_form').submit();
 
     };
 
-    $(function(){
+    $(function () {
 
-      if( !window.location.search ){
+      if (!window.location.search) {
         return;
       }
 
       var queryList = window.location.search.slice(1).split('&');
-      var query     = {};
+      var query = {};
 
-      for( var i in queryList ){
+      for (var i in queryList) {
 
-        var tmp = queryList[ i ].split('=');
-        query[ tmp[ 0 ] ] = tmp[ 1 ];
+        var tmp = queryList[i].split('=');
+        query[tmp[0]] = tmp[1];
 
       }
 
-      if( query.id && query.id.indexOf && query.id.indexOf('dropbox') === -1 && query.id.indexOf('gdrive') === -1 && query.id.indexOf('onedrive') === -1 ){
-        query.id = parseInt( query.id )
+      if (query.id && query.id.indexOf && query.id.indexOf('dropbox') === -1 && query.id.indexOf('gdrive') === -1 && query.id.indexOf('onedrive') === -1) {
+        query.id = parseInt(query.id)
       }
 
-      if( query.empty ){
+      if (query.empty) {
 
-        $.ajax( { url : 'https://wopi.horbito.com/discover/editnew/' + FORMAT + '/' + query.id, xhrFields : { withCredentials : true } }).done( function( data, status ){
-          _doTheJob( data, status );
+        $.ajax({ url: `https://wopi.horbito.com/w/${query.w}/discover/editnew/${FORMAT}/${query.id}`, xhrFields: { withCredentials: true } }).done(function (data, status) {
+          _doTheJob(data, status);
         });
 
-      }else{
+      } else {
 
-        $.ajax( { url : 'https://wopi.horbito.com/discover/edit/' + FORMAT + '/' + query.id, xhrFields : { withCredentials : true } }).done( function( data, status ){
-          _doTheJob( data, status );
+        $.ajax({
+          url: `https://wopi.horbito.com/w/${query.w}/discover/edit/${FORMAT}/${query.id}`, xhrFields: { withCredentials: true }
+        }).done(function (data, status) {
+          _doTheJob(data, status);
         });
 
       }
@@ -71,8 +73,8 @@
 
   </script>
   <style>
-    body{
-      background: #217346 url(https://static.inevio.com/app/230/logo.png) center center no-repeat;
+    body {
+      background: #217346 url(https://cdn.horbito.com/app/230/logo.png) center center no-repeat;
       background-size: 172px 36px;
     }
 
@@ -85,14 +87,16 @@
     }
   </style>
 </head>
+
 <body>
 
   <form class="office_form" name="office_form" target="" action="" method="post">
-    <input name="access_token" value="" type="hidden"/>
-    <input name="access_token_ttl" value="" type="hidden"/>
+    <input name="access_token" value="" type="hidden" />
+    <input name="access_token_ttl" value="" type="hidden" />
   </form>
 
   <span class="frameholder"></span>
 
 </body>
+
 </html>
