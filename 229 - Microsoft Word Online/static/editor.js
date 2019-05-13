@@ -157,7 +157,7 @@ params.data.done(function (id) {
         if (!formats.original || !formats.original.size) {
 
           if (isElectron) {
-            let webviewDom = `<webview src="https://static.inevio.com/app/229/editor.html?id=${id}&empty=1&w=${ALIAS}" autosize plugins allowpopups></webview>`
+            let webviewDom = `<webview src="https://cdn.horbito.com/app/229/editor.html?id=${id}&empty=1&w=${ALIAS}" autosize plugins allowpopups></webview>`
             win.append(webviewDom)
           } else {
             windowObject.location.href = `https://cdn.horbito.com/app/229/editor.html?id=${id}&empty=1&w=${ALIAS}`
@@ -166,7 +166,7 @@ params.data.done(function (id) {
         } else if (VALID_MIMES.indexOf(formats.original.mime) !== -1) {
 
           if (isElectron) {
-            let webviewDom = `<webview src="https://static.inevio.com/app/229/editor.html?id=${id}&empty=0&w=${ALIAS}" autosize plugins allowpopups></webview>`
+            let webviewDom = `<webview src="https://cdn.horbito.com/app/229/editor.html?id=${id}&empty=0&w=${ALIAS}" autosize plugins allowpopups></webview>`
             win.append(webviewDom)
           } else {
             windowObject.location.href = `https://cdn.horbito.com/app/229/editor.html?id=${id}&empty=0&w=${ALIAS}`

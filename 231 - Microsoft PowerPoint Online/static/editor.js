@@ -79,10 +79,11 @@ params.data.done(function (id) {
           return alert(lang.openFileError, _close);
         }
 
-        if (isElectron) {
+        if(isElectron){
           let webviewDom = `<webview src="https://cdn.horbito.com/app/231/editor.html?id=${encodeURIComponent('gdrive:' + params.gdrive + ':' + id)}&empty=0&w=${ALIAS}" autosize plugins allowpopups></webview>`
-          win.append(webviewDom)
-        } else {
+          win.append(webviewDom)  
+          //$('webview').attr('src', 'https://static.inevio.com/app/231/editor.html?id=' + encodeURIComponent( 'gdrive:' + params.gdrive + ':' + id )  + '&empty=0')
+        }else{
           windowObject.location.href = `https://cdn.horbito.com/app/231/editor.html?id=${encodeURIComponent('gdrive:' + params.gdrive + ':' + id)}&empty=0&w=${ALIAS}`
         }
 
@@ -109,10 +110,11 @@ params.data.done(function (id) {
           return alert(lang.openFileError, _close);
         }
 
-        if (isElectron) {
+        if(isElectron){
           let webviewDom = `<webview src="https://cdn.horbito.com/app/231/editor.html?id=${encodeURIComponent('dropbox:' + params.dropbox + ':' + id)}&empty=0&w=${ALIAS}" autosize plugins allowpopups></webview>`
-          win.append(webviewDom)
-        } else {
+          win.append(webviewDom) 
+          //$('webview').attr('src', 'https://static.inevio.com/app/231/editor.html?id=' + encodeURIComponent( 'dropbox:' + params.dropbox + ':' + id )  + '&empty=0')
+        }else{
           windowObject.location.href = `https://cdn.horbito.com/app/231/editor.html?id=${encodeURIComponent('dropbox:' + params.dropbox + ':' + id)}&empty=0&w=${ALIAS}`
         }
 
@@ -132,10 +134,11 @@ params.data.done(function (id) {
           return alert(lang.openFileError, _close);
         }
 
-        if (isElectron) {
+        if(isElectron){
           let webviewDom = `<webview src="https://cdn.horbito.com/app/231/editor.html?id=${encodeURIComponent('onedrive:' + params.onedrive + ':' + id)}&empty=0&w=${ALIAS}" autosize plugins allowpopups></webview>`
           win.append(webviewDom)
-        } else {
+          //$('webview').attr('src', 'https://static.inevio.com/app/231/editor.html?id=' + encodeURIComponent( 'onedrive:' + params.onedrive + ':' + id )  + '&empty=0')
+        }else{
           windowObject.location.href = `https://cdn.horbito.com/app/231/editor.html?id=${encodeURIComponent('onedrive:' + params.onedrive + ':' + id)}&empty=0&w=${ALIAS}`
         }
 
@@ -161,19 +164,21 @@ params.data.done(function (id) {
 
         if (!formats.original || !formats.original.size) {
 
-          if (isElectron) {
+          if(isElectron){
             let webviewDom = `<webview src="https://cdn.horbito.com/app/231/editor.html?id=${id}&empty=1&w=${ALIAS}" autosize plugins allowpopups></webview>`
-            win.append(webviewDom)
-          } else {
+            win.append(webviewDom)            
+            //$('webview').attr('src', 'https://static.inevio.com/app/231/editor.html?id=' + id + '&empty=1')
+          }else{
             windowObject.location.href = `https://cdn.horbito.com/app/231/editor.html?id=${id}&empty=1&w=${ALIAS}`
           }
 
         } else if (VALID_MIMES.indexOf(formats.original.mime) !== -1) {
 
-          if (isElectron) {
+          if(isElectron){
             let webviewDom = `<webview src="https://cdn.horbito.com/app/231/editor.html?id=${id}&empty=0&w=${ALIAS}" autosize plugins allowpopups></webview>`
-            win.append(webviewDom)
-          } else {
+            win.append(webviewDom)            
+            //$('webview').attr('src', 'https://static.inevio.com/app/231/editor.html?id=' + id + '&empty=0')
+          }else{
             windowObject.location.href = `https://cdn.horbito.com/app/231/editor.html?id=${id}&empty=0&w=${ALIAS}`
           }
 
