@@ -79,8 +79,8 @@ params.data.done(function (id) {
 
         // To Do -> Improve check like horbito's files
         if (isElectron) {
-          let webviewDom = `<webview src="https://cdn.horbito.com/app/229/editor.html?id=${encodeURIComponent(`gdrive:${params.gdrive}:${id} `)}&empty=0&w=${ALIAS}" autosize plugins allowpopups></webview>`
-          win.append(webviewDom)
+          let webviewDom = `<webview class="office" src="https://cdn.horbito.com/app/229/editor.html?id=${encodeURIComponent(`gdrive:${params.gdrive}:${id} `)}&empty=0&w=${ALIAS}" autosize plugins allowpopups nodeintegration></webview>`
+          injectWebviewAndBind(webviewDom)
         } else {
           windowObject.location.href = `https://cdn.horbito.com/app/229/editor.html?id=${encodeURIComponent(`gdrive:${params.gdrive}:${id}`)}&empty=0&w=${ALIAS}`
         }
@@ -107,8 +107,8 @@ params.data.done(function (id) {
         }
 
         if (isElectron) {
-          let webviewDom = `<webview src="https://cdn.horbito.com/app/229/editor.html?id=${encodeURIComponent(`dropbox:${params.dropbox}:${id} `)}&empty=0&w=${ALIAS}" autosize plugins allowpopups></webview>`
-          win.append(webviewDom)
+          let webviewDom = `<webview class="office" src="https://cdn.horbito.com/app/229/editor.html?id=${encodeURIComponent(`dropbox:${params.dropbox}:${id} `)}&empty=0&w=${ALIAS}" autosize plugins allowpopups nodeintegration></webview>`
+          injectWebviewAndBind(webviewDom)
         } else {
           windowObject.location.href = `https://cdn.horbito.com/app/229/editor.html?id=${encodeURIComponent(`dropbox:${params.dropbox}:${id}`)}&empty=0&w=${ALIAS}`
         }
@@ -129,8 +129,8 @@ params.data.done(function (id) {
         }
 
         if (isElectron) {
-          let webviewDom = `<webview src="https://cdn.horbito.com/app/229/editor.html?id=${encodeURIComponent(`onedrive:${params.onedrive}:${id}`)}&empty=0&w=${ALIAS}" autosize plugins allowpopups></webview>`
-          win.append(webviewDom)
+          let webviewDom = `<webview class="office" src="https://cdn.horbito.com/app/229/editor.html?id=${encodeURIComponent(`onedrive:${params.onedrive}:${id}`)}&empty=0&w=${ALIAS}" autosize plugins allowpopups nodeintegration></webview>`
+          injectWebviewAndBind(webviewDom)
         } else {
           windowObject.location.href = `https://cdn.horbito.com/app/229/editor.html?id=${encodeURIComponent(`onedrive:${params.onedrive}:${id}`)}&empty=0&w=${ALIAS}`
         }
@@ -157,8 +157,8 @@ params.data.done(function (id) {
         if (!formats.original || !formats.original.size) {
 
           if (isElectron) {
-            let webviewDom = `<webview src="https://cdn.horbito.com/app/229/editor.html?id=${id}&empty=1&w=${ALIAS}" autosize plugins allowpopups></webview>`
-            win.append(webviewDom)
+            let webviewDom = `<webview class="office" src="https://cdn.horbito.com/app/229/editor.html?id=${id}&empty=1&w=${ALIAS}" autosize plugins allowpopups nodeintegration></webview>`
+            injectWebviewAndBind(webviewDom)
           } else {
             windowObject.location.href = `https://cdn.horbito.com/app/229/editor.html?id=${id}&empty=1&w=${ALIAS}`
           }
@@ -166,8 +166,8 @@ params.data.done(function (id) {
         } else if (VALID_MIMES.indexOf(formats.original.mime) !== -1) {
 
           if (isElectron) {
-            let webviewDom = `<webview src="https://cdn.horbito.com/app/229/editor.html?id=${id}&empty=0&w=${ALIAS}" autosize plugins allowpopups></webview>`
-            win.append(webviewDom)
+            let webviewDom = `<webview class="office" src="https://cdn.horbito.com/app/229/editor.html?id=${id}&empty=0&w=${ALIAS}" autosize plugins allowpopups nodeintegration></webview>`
+            injectWebviewAndBind(webviewDom)
           } else {
             windowObject.location.href = `https://cdn.horbito.com/app/229/editor.html?id=${id}&empty=0&w=${ALIAS}`
           }
@@ -187,3 +187,17 @@ params.data.done(function (id) {
 if (dontWait) {
   params.data.resolve(dontWait);
 }
+
+if(isElectron){
+  var injectWebviewAndBind = function(webview){
+    const { BrowserWindow } = require('electron').remote
+    let webviewPrint = `<webview class="print"></webview>`
+    win.append(webview)
+    win.append(webviewPrint)
+    $('webview.office').on('new-window', (event)=>{
+      console.log('new-window', event.originalEvent)
+      $('webview.print').attr('src', event.originalEvent.url)
+    })
+  }
+}
+
