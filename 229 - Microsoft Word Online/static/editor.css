@@ -35,7 +35,11 @@
   opacity: 1;
 }
 
-webview{
+webview.office{
   width: 100%;
   height: ~'calc(100% - 34px)';
+}
+
+webview.print{
+  display: none;
 }
