@@ -1,3 +1,4 @@
+
 var VALID_MIMES = ['application/vnd.openxmlformats-officedocument.wordprocessingml.document']
 var ALIAS = api.system.workplace().alias
 var dontWait = false
@@ -5,13 +6,6 @@ var win = $(this)
 var width = api.tool.desktopWidth()
 var height = api.tool.desktopHeight() - 70
 var isElectron = false
-
-var VALID_MIMES  = ['application/vnd.openxmlformats-officedocument.wordprocessingml.document']
-var dontWait     = false
-var win          = $(this)
-var width        = api.tool.desktopWidth()
-var height       = api.tool.desktopHeight() - 70
-var isElectron   = false
 
 var userAgent = navigator.userAgent.toLowerCase()
 if (userAgent.indexOf(' electron/') > -1) {
