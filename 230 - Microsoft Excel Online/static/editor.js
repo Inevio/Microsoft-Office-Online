@@ -51,6 +51,25 @@ if (!isElectron) {
     return api.app.removeView(win);
   }
 
+}else{
+  win.on('ui-view-focus', function (e) {
+    if($('webview').length){
+      $('webview').blur()
+      $('webview')[0].focus()
+      $('webview').focus()
+      setTimeout(()=>{
+        $('webview').blur()
+        $('webview').focus()
+        $('webview')[0].focus()
+      },500)     
+    }else{
+      setTimeout(()=>{
+        $('webview').blur()
+        $('webview').focus()
+        $('webview')[0].focus()
+      },2000)
+    }
+  })
 }
 
 if (typeof params.data !== 'object') {
